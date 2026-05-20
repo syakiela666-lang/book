@@ -1,0 +1,17 @@
+{
+  "name": "Edu PWA",
+  "short_name": "Edu PWA",
+  "description": "Aplikasi Catatan Trading & Edukasi",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#FAFAFA",
+  "theme_color": "#0066CC",
+  "icons": [
+    {
+      "src": "icon.png",
+      "sizes": "1024x1024",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
