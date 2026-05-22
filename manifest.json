@@ -1,6 +1,6 @@
 {
-  "name": "Edu PWA",
-  "short_name": "Edu PWA",
+  "name": "MD-Text",
+  "short_name": "MD-Text",
   "description": "Aplikasi Catatan Trading & Edukasi",
   "start_url": ".",
   "display": "standalone",

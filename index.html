@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>PWA Pembelajaran</title>
+    <title>MD-Text</title>
     <!-- PWA Manifest & Icons -->
     <link rel="manifest" href="/manifest.json">
     <link rel="icon" type="image/png" href="/icon.png">
@@ -20,8 +20,8 @@
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked-katex-extension/lib/index.umd.js"></script>
     <!-- Custom CSS -->
-  <script type="module" crossorigin src="/assets/index-JBT7nZ-p.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/index-Dm7JNXnF.css">
+  <script type="module" crossorigin src="/assets/index-ngSl5ZY7.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-BwhmLZSa.css">
 </head>
 <body>
 
@@ -31,7 +31,7 @@
         <header class="home-topbar">
             <div class="category-filter-wrapper">
                 <select id="category-filter" aria-label="Filter Kategori">
-                    <option value="all">Semua Kategori</option>
+                    <option value="all">All Categories</option>
                     <!-- Kategori akan di-inject JS -->
                 </select>
                 <button id="settings-btn" class="manage-btn" aria-label="Pengaturan">⚙️</button>
@@ -63,6 +63,18 @@
                 </svg>
             </button>
             <h2 id="reading-title" class="reading-title">Judul Materi</h2>
+            <button id="copy-lesson-btn" class="edit-btn" aria-label="Copy Materi" style="margin-right: 8px; color: var(--text-secondary);">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+            </button>
+            <button id="delete-lesson-btn" class="edit-btn" aria-label="Hapus Materi" style="margin-right: 8px; color: #ff4444;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="3 6 5 6 21 6"></polyline>
+                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                </svg>
+            </button>
             <button id="edit-lesson-btn" class="edit-btn" aria-label="Edit Materi">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
@@ -85,26 +97,40 @@
                     <line x1="6" y1="6" x2="18" y2="18"></line>
                 </svg>
             </button>
-            <h2 class="reading-title">Tambah Materi Baru</h2>
-            <button id="editor-save-btn" class="save-btn">Simpan</button>
+            <h2 class="reading-title">Add Note</h2>
+            <button id="editor-save-btn" class="save-btn">Save</button>
         </header>
 
         <section class="editor-container">
             <div class="form-group">
-                <label for="input-category">Kategori</label>
+                <label for="input-category">Categories</label>
                 <select id="input-category">
                     <!-- Kategori akan di-inject JS -->
                 </select>
             </div>
 
             <div class="form-group">
-                <label for="input-title">Judul Materi</label>
+                <label for="input-title">Title</label>
                 <input type="text" id="input-title" placeholder="Contoh: Pengenalan Candlestick" required>
             </div>
 
             <div class="form-group">
-                <label for="input-content">Konten (Paste dari Gemini)</label>
-                <textarea id="input-content" rows="15" placeholder="# Judul..." spellcheck="false" required></textarea>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
+                    <button type="button" id="select-all-btn" style="padding: 4px 12px; font-size: 13px; font-weight: 500; border-radius: 6px; background: var(--text-secondary, #6c757d); color: white; border: none; cursor: pointer; display: flex; align-items: center; gap: 4px;">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14 3h7v7M14 21h7v-7M3 14v7h7M3 10V3h7"></path>
+                        </svg>
+                        Select All
+                    </button>
+                    <button type="button" id="paste-content-btn" style="padding: 4px 12px; font-size: 13px; font-weight: 500; border-radius: 6px; background: var(--primary-color, #0066CC); color: white; border: none; cursor: pointer; display: flex; align-items: center; gap: 4px;">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        Paste
+                    </button>
+                </div>
+                <textarea id="input-content" rows="15" placeholder="Type Here" spellcheck="false" required></textarea>
             </div>
         </section>
     </main>
